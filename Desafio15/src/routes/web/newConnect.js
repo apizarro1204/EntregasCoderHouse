@@ -9,7 +9,6 @@ import Container from "./../../DAOs/connectionMongo.js";
 import passport from "./../../config/passportConfig.js";
 import { fork } from "child_process";
 import os from "os";
-import cluster from 'node:cluster';
 
 const numCpu = os.cpus().length;
 const products = new Container();
@@ -49,8 +48,8 @@ router.get("/info", (req, res) => {
   console.log(process.argv);
 
   if(info) {
-    res.render(path.join(process.cwd(), "/views/info.ejs"), { info });
-    //res.status(200).json(info)
+    //res.render(path.join(process.cwd(), "/views/info.ejs"), { info });
+    res.status(200).json(info)
 } else{
     res.status(404).send({message: "Not found"})
   }
